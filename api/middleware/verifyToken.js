@@ -10,6 +10,4 @@ export const verifyToken=async (req,res,next)=>{
        req.userId=payload.id;
        next();
     })
-
-    res.status(200).json({message:"You are Authenticated"});
 }

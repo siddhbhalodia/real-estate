@@ -1,6 +1,5 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"
 import { useState } from "react";
 import apiRequest from "../../lib/apiRequest";
 
@@ -18,6 +17,12 @@ function Register() {
     const username =  fromData.get("username")
     const email =  fromData.get("email")
     const password =  fromData.get("password")
+
+    if(!email||!password||!username){
+        
+    }
+
+    console.log(username,email,password) 
 
     try{
       const res = await apiRequest.post("/auth/register",{
