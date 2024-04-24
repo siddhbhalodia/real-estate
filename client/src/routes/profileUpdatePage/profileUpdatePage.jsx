@@ -9,7 +9,7 @@ import UploadWidget from "../../components/uploadWidget/UploadWidget";
 function ProfileUpdatePage() {
   const {currentUser,updateUser}=useContext(AuthContext)
   const [error,setError] = useState("")
-  const [avatar,setAvatar] = useState(currentUser.avatar)
+  const [avatar,setAvatar] = useState([])
 
   const navigate = useNavigate()
 
@@ -20,7 +20,12 @@ function ProfileUpdatePage() {
     const {username , email , password} = Object.fromEntries(formData)
 
     try{
-      const res = await apiRequest.put(`/users/${currentUser.id}`,{username,email,password,avatar})
+      const res = await apiRequest.put(`/users/${currentUser.id}`,{
+        username,
+        email,
+        password,
+        avatar:avatar[0]
+      })
       updateUser(res.data)
       navigate("/profile")
       console.log(res.data)
@@ -61,15 +66,15 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar || "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0="} alt="" className="avatar" />
+        <img src={avatar[0] || currentUser.avatar || "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0="} alt="" className="avatar" />
         <UploadWidget uwConfig={{
           cloudName: "ddbgvw0vt",
           uploadPreset: "estate",
-          multiple: false,
+          multiple: false,  
           maxImageFileSize: 2000000,
           folder: "avatars"
         }}
-        setAvatar = {setAvatar}
+        setState = {setAvatar}
         />
       </div>
     </div>

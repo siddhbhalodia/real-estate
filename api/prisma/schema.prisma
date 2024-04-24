@@ -48,10 +48,10 @@ enum Type{
 }
 
 enum Property{
-  Appartment
-  House
-  Condo
-  Land
+  apartment
+  house
+  condo
+  land
 }
 
 model PostDetail{
