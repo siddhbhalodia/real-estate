@@ -4,10 +4,12 @@ import {AuthContext} from "../../context/AuthContext"
 import apiRequest from "../../lib/apiRequest"
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 function ProfileUpdatePage() {
   const {currentUser,updateUser}=useContext(AuthContext)
   const [error,setError] = useState("")
+  const [avatar,setAvatar] = useState(currentUser.avatar)
 
   const navigate = useNavigate()
 
@@ -18,7 +20,7 @@ function ProfileUpdatePage() {
     const {username , email , password} = Object.fromEntries(formData)
 
     try{
-      const res = await apiRequest.put(`/users/${currentUser.id}`,{username,email,password})
+      const res = await apiRequest.put(`/users/${currentUser.id}`,{username,email,password,avatar})
       updateUser(res.data)
       navigate("/profile")
       console.log(res.data)
@@ -59,7 +61,16 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={currentUser.avatar|| "/noavatar.jpg"} alt="" className="avatar" />
+        <img src={avatar || "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0="} alt="" className="avatar" />
+        <UploadWidget uwConfig={{
+          cloudName: "ddbgvw0vt",
+          uploadPreset: "estate",
+          multiple: false,
+          maxImageFileSize: 2000000,
+          folder: "avatars"
+        }}
+        setAvatar = {setAvatar}
+        />
       </div>
     </div>
   );
