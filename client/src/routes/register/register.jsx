@@ -18,12 +18,6 @@ function Register() {
     const email =  fromData.get("email")
     const password =  fromData.get("password")
 
-    if(!email||!password||!username){
-        
-    }
-
-    console.log(username,email,password) 
-
     try{
       const res = await apiRequest.post("/auth/register",{
             username,
