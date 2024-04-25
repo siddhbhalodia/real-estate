@@ -1,10 +1,24 @@
 import prisma from "../lib/prisma.js"
 
 export const getPosts = async (req,res) => {
+    const query=req.query
     try{
-        const posts = await prisma.post.findMany()
-
-        res.status(200).json(posts)
+        const posts = await prisma.post.findMany({
+            where:{
+                city:query.city || undefined,
+                type:query.type || undefined,
+                property:query.property || undefined,
+                bedroom:parseInt(query.bedroom) || undefined,
+                price:{
+                    gte: parseInt(query.minPrice) || 0,
+                    lte: parseInt(query.maxPrice) || 10000000,
+                }
+                
+            }
+        })
+        // setTimeout(()=>{
+            res.status(200).json(posts)
+        // },3000)
     }catch(err){
         console.log(err)
         res.status(500).json({message: "Failed to get posts"})
@@ -69,13 +83,19 @@ export const deletePost = async (req,res) => {
     const tokenUserId = req.userId  
     try{
         const post = await prisma.post.findUnique({
-            where: {id}
+            where: {id},
+            include: {
+                postDetail: true,
+            }
         })
-
+        
         if(post.userId !== tokenUserId){
             return res.status(403).json({message: "Not Authorized!"})
         }
-
+        if(!post) return res.status(404).json({message: "Post not found"})
+        if(post.postDetail){
+            await prisma.postDetail.delete({where: {postId:id}})
+        }
         await prisma.post.delete({where: {id}})
         
         res.status(200).json({message: "Post Deleted Successfully!!"})
