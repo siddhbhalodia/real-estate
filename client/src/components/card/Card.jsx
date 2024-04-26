@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import "./card.scss";
-
+import alt from'./../../../public/arrow.png'
 function Card({ item }) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.images[0]} alt="" />
+        <img src={item.images[0]} alt={alt} />
       </Link>
       <div className="textContainer">
         <h2 className="title">
