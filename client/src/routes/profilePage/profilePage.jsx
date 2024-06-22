@@ -92,7 +92,6 @@ function ProfilePage() {
             </Await>
 
             </Suspense>
-          <Chat/>
         </div>
       </div>
     </div>
