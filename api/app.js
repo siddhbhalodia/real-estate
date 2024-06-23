@@ -8,6 +8,16 @@ import userRoute from "./routes/user.route.js"
 import chatRoute from "./routes/chat.route.js"
 import messageRoute from "./routes/message.route.js"
 
+const io = require('socket.io-client');
+const socket = io('https://real-estate-socket-ldak.onrender.com');
+
+socket.on('connect', () => {
+  console.log('API connected to socket server');
+});
+
+// Example: Emitting an event to the socket server
+socket.emit('eventFromAPI', { data: 'some data' });
+
 const app = express()
 
 app.use(cors({origin:process.env.CLIENT_URL,credentials:true}))
