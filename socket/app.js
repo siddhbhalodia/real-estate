@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "https://real-estate-client-v5uv.onrender.com/",
+    origin: "localhost:5173",
   },
 });
 
