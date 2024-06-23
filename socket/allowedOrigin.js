@@ -28,5 +28,7 @@ const allowedOrigin=[
     'https://ecomvision-jbtw.onrender.com/',
     'https://ecomvision-sigma.vercel.app/',
     'https://ecomvision-n2myz736c-krishnas-projects-e183a75e.vercel.app/',
+    'https://real-estate-socket-ldak.onrender.com/socket.io/',
+    'https://real-estate-socket-ldak.onrender.com/'
 ]
 export default allowedOrigin;
