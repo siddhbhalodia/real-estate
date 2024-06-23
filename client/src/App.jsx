@@ -21,7 +21,7 @@ function App() {
       children:[
         {
           path:"/",
-          element:<Login/>
+          element:<HomePage/>
         },
         {
           path:"/list",

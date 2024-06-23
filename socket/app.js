@@ -1,22 +1,8 @@
 import { Server } from "socket.io";
-import allowedOrigin from "./allowedOrigin.js";
-
-// const corsOptions ={
-//   origin: allowedOrigin, 
-//   credentials:true,
-//   optionSuccessStatus:200,
-//   sameSite:'none',
-//   secure:true,
-// }
-// app.use(cors(corsOptions));
 
 const io = new Server({
   cors: {
-    origin: allowedOrigin, 
-    credentials:true,
-    optionSuccessStatus:200,
-    sameSite:'none',
-    secure:true,
+    origin: "http://localhost:5173",
   },
 });
 
