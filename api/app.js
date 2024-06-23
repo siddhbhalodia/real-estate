@@ -8,7 +8,8 @@ import userRoute from "./routes/user.route.js"
 import chatRoute from "./routes/chat.route.js"
 import messageRoute from "./routes/message.route.js"
 
-const io = require('socket.io-client');
+// const io = require('socket.io-client');
+import io from "socket.io-client";
 const socket = io('https://real-estate-socket-ldak.onrender.com');
 
 socket.on('connect', () => {
